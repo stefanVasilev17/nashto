@@ -11,7 +11,7 @@ import javax.persistence.Table;
 /**
  * Date: 1/28/2021 Time: 2:54 PM
  * <p>
- * TODO: WRITE THE DESCRIPTION HERE
+ *
  *
  * @author Vladislav_Zlatanov
  */

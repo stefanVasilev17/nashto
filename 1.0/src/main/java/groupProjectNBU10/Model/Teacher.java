@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+
 import java.util.Set;
 
 /**
  * Date: 1/28/2021 Time: 2:49 PM
  * <p>
- * TODO: WRITE THE DESCRIPTION HERE
+ *
  *
  * @author Vladislav_Zlatanov
  */

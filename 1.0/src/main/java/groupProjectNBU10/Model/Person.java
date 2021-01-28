@@ -8,12 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+
 
 /**
  * Date: 1/28/2021 Time: 2:31 PM
  * <p>
- * TODO: WRITE THE DESCRIPTION HERE
+ *
  *
  * @author Vladislav_Zlatanov
  */
