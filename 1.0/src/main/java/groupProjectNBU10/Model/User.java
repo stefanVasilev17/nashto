@@ -1,7 +1,16 @@
 package groupProjectNBU10.Model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.MappedSuperclass;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@MappedSuperclass
 public class  User
 {
 
