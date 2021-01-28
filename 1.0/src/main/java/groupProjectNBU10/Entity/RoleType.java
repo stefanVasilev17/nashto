@@ -1,4 +1,4 @@
-package Entity;
+package groupProjectNBU10.Entity;
 
 /**
  * Date: 1/28/2021 Time: 2:41 PM

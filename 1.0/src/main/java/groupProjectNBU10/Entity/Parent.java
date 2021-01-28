@@ -1,4 +1,4 @@
-package Entity;
+package groupProjectNBU10.Entity;
 
 import javax.persistence.ManyToMany;
 import java.util.Set;

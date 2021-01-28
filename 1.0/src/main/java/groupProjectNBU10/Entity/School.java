@@ -1,4 +1,4 @@
-package Entity;
+package groupProjectNBU10.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

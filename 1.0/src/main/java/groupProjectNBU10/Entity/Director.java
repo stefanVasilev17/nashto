@@ -1,4 +1,4 @@
-package Entity;
+package groupProjectNBU10.Entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
