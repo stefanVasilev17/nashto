@@ -3,15 +3,17 @@ package groupProjectNBU10.Controller;
 import groupProjectNBU10.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/v1/user")
-//@PreAuthorize("hasRole(T(com.example.digitalportfolio.role.Roles).ADMIN_ROLE)")
+@PreAuthorize("hasRole(T(com.example.digitalportfolio.role.Roles).ADMIN_ROLE)")
 public class AdminController
 {
-  private final AdminService adminService;
+  private AdminService adminService;
 
 
   @Autowired
@@ -20,6 +22,21 @@ public class AdminController
     this.adminService = adminService;
   }
 
+  /**
+   * That's a method wherewith user can be locked by admin using /api/v1/user/setlock
+   *
+   * @param username the username which user can log into database.
+   * @param lock
+   * @return ResponseEntity
+   */
+
+  @PutMapping("/setlock")
+  public ResponseEntity<Void> setLockUser(@RequestParam String username, @RequestParam boolean lock)
+  {
+
+    adminService.lockUser(lock, username);
+    return ResponseEntity.ok().build();
+  }
 
   /**
    * That's a method wherewith admin can be created using /api/v1/user/createAdmin
@@ -30,9 +47,9 @@ public class AdminController
    */
 
   @PostMapping("/createadmin")
-  public ResponseEntity<Void> createAdmin(@RequestParam String username, @RequestParam String password)
+  public ResponseEntity<Void> createAdmin(@RequestParam String username, @RequestParam String password, @RequestParam String email)
   {
-    adminService.createAdmin(username, new BCryptPasswordEncoder().encode(password));
+    adminService.createAdmin(username, new BCryptPasswordEncoder().encode(password), email);
     return ResponseEntity.ok().build();
   }
 

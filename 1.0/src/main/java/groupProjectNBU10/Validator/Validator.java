@@ -1,6 +1,5 @@
 package groupProjectNBU10.Validator;
 
-import groupProjectNBU10.Model.User;
 import groupProjectNBU10.Roles;
 import groupProjectNBU10.exceptions.AccessForbiddenException;
 import groupProjectNBU10.exceptions.IllegalDataException;
@@ -39,4 +38,6 @@ public class Validator
       throw new AccessForbiddenException("Empty data !");
     }
   }
+
+
 }

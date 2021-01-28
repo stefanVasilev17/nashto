@@ -12,29 +12,64 @@ import javax.validation.Valid;
 @Service
 public class UserService
 {
-  private final UserRepository userRepository;
-  private       Validator      validator;
+  private UserRepository      userRepository;
+  private Validator           validator;
+
+  public UserService()
+  {
+  }
 
   @Autowired
-  public UserService(UserRepository userRepository)
+  public UserService(UserRepository userRepository,Validator validator)
   {
     this.userRepository = userRepository;
+    this.validator = validator;
+
   }
 
   /**
    * That's a method wherewith user is created.
+   * There is a check if user is null, if it is, an exception is thrown.
+   * There is a check if the role is admin, if it is , an exception is thrown.
+   * There is a check if the username is 'admin', if it is, an exception is thrown.
    *
-   * @param userName the username which is necessary for register.
-   * @param password the password which is necessary for register.
+   * @param userName the username which is necessary for logging.
+   * @param password the password which is necessary for logging.
    * @param role     the role which the user has.
+
    */
 
-  public void createUser(String userName, @Valid String password, String role)//TODO posle da napravq anotaciqta za parolata @ValidPassword
+  public void createUser(String userName, @Valid String password, String role)
   {
+    User u = userRepository.findUserPerRegistration(userName);
+
+    validator.validateIsNotNull(u);
+
     validator.validateIsNull(userName);
     validator.validateIsNull(role);
 
+    validator.validateBuyerIsNotAdmin(role);
+    validateAdminName(userName);
     userRepository.createUser(userName, password);
+  }
+
+
+  /**
+   * That's a method wherewith user get it's balance in portfolio.
+   *
+   * @param username the username which is necessary for logging.
+   */
+
+
+
+  public User findByUserName(String username)
+  {
+    return userRepository.findByUserName(username);
+  }
+
+  public User findAdmin(String username)
+  {
+    return userRepository.findByUserName(username);
   }
 
   public void delete(String username)
@@ -42,8 +77,15 @@ public class UserService
     userRepository.delete(username);
   }
 
-  public User findByUserName(String username)
+  public void enableUser(String username)//for testing
   {
-    return userRepository.findByUserName(username);
+    userRepository.enableUser(username);
+  }
+
+  private void validateAdminName(String name1)
+  {
+    if (name1.equalsIgnoreCase("admin")) {
+      throw new IllegalDataException("The username cannot be 'admin'!");
+    }
   }
 }

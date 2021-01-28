@@ -7,14 +7,15 @@ import groupProjectNBU10.Validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class AdminService
 {
 
-  private final UserRepository userRepository;
-  private final RoleRepository roleRepository;
-  private final Validator   validator;
-  private final UserService userService;
+  private UserRepository userRepository;
+  private RoleRepository roleRepository;
+  private Validator      validator;
+  private UserService    userService;
 
   @Autowired
   public AdminService(UserRepository userRepository, RoleRepository roleRepository, Validator validator
@@ -34,10 +35,12 @@ public class AdminService
    * @param password the password which is necessary for logging.
    */
 
-  public void createAdmin(String username, String password)
+  public void createAdmin(String username,
+      String password, String email)
   {
-    validator.validateIsNotNull(userRepository.findByUserName(username));
-    userRepository.createAdmin(username, password);
+    validator.validateIsNotNull(userRepository.findUserPerRegistration(username));
+    userRepository.createAdmin(username, password, email);
+    userService.enableUser(username);
   }
 
   /**
@@ -54,16 +57,16 @@ public class AdminService
     userRepository.delete(username);
   }
 
-//  /**
-//   * That's a method wherewith admin can lock an user.
-//   *
-//   * @param lock     it is a boolean type
-//   * @param username the username which is necessary for logging.
-//   */
-//
-//  public void lockUser(boolean lock, String username)
-//  {
-//    User u = userRepository.findByUserName(username);
-//    userRepository.setLock(username, lock);
-//  }
+  /**
+   * That's a method wherewith admin can lock an user.
+   *
+   * @param lock     it is a boolean type
+   * @param username the username which is necessary for logging.
+   */
+
+  public void lockUser(boolean lock, String username)
+  {
+    User u = userRepository.findByUserName(username);
+    userRepository.setLock(username, lock);
+  }
 }

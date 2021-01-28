@@ -1,23 +1,17 @@
 package groupProjectNBU10.Model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.MappedSuperclass;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@MappedSuperclass
 public class  User
 {
 
   private String      username;
-  //@ValidPassword
+
   private String      password;
   private Set<String> role;
+  private boolean     isLocked; // default false
+  private boolean     isEnabled; // default false
+  private String      email;
 
   public String getUsername()
   {
@@ -39,6 +33,17 @@ public class  User
     this.password = password;
   }
 
+
+  public boolean isLocked()
+  {
+    return isLocked;
+  }
+
+  public void setLocked(boolean locked)
+  {
+    isLocked = locked;
+  }
+
   public Set<String> getRole()
   {
     return role;
@@ -49,5 +54,23 @@ public class  User
     this.role = role;
   }
 
+  public String getEmail()
+  {
+    return email;
+  }
 
+  public void setEmail(String email)
+  {
+    this.email = email;
+  }
+
+  public boolean isEnabled()
+  {
+    return isEnabled;
+  }
+
+  public void setEnabled(boolean enabled)
+  {
+    isEnabled = enabled;
+  }
 }

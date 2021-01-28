@@ -11,7 +11,7 @@ import java.util.Set;
 @Repository
 public class RoleRepository
 {
-  private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+  private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
   @Autowired
@@ -38,15 +38,15 @@ public class RoleRepository
   /**
    * A method wherewith admin can add a role to user
    *
-   * @param role     the necessary role which admin want to add to user.
+   * @param r        the necessary role which admin want to add to user.
    * @param username
    */
 
-  public void addRole(String role, String username)
+  public void addRole(String r, String username)
   {
     MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
     mapSqlParameterSource.addValue("username", username);
-    mapSqlParameterSource.addValue("role", role);
+    mapSqlParameterSource.addValue("role", r);
     String sql = "INSERT INTO ROLES(ROLE , USERNAME) VALUES (:role,:username)";
     namedParameterJdbcTemplate.update(sql, mapSqlParameterSource);
   }
@@ -54,15 +54,15 @@ public class RoleRepository
   /**
    * A method wherewith admin can delete a role from user.
    *
-   * @param role     the necessary role which admin want to delete from user.
+   * @param r        the necessary role which admin want to delete from user.
    * @param username
    */
 
-  public void deleteRole(String role, String username)
+  public void deleteRole(String r, String username)
   {
     MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
     mapSqlParameterSource.addValue("username", username);
-    mapSqlParameterSource.addValue("role", role);
+    mapSqlParameterSource.addValue("role", r);
     String sql = "DELETE FROM  ROLES WHERE ROLE = :role  AND USERNAME = :username";
     namedParameterJdbcTemplate.update(sql, mapSqlParameterSource);
   }

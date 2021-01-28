@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
-
 @Service
 public class RoleService
 {
-  private final RoleRepository roleRepository;
-  private final Validator      validator;
+  private RoleRepository roleRepository;
+  private Validator      validator;
 
   @Autowired
   public RoleService(RoleRepository roleRepository, Validator validator)
